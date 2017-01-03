@@ -33,22 +33,22 @@ class ViewController: UIViewController {
       super.viewDidLoad()
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
   }
   
   // MARK: IBActions
-  @IBAction func segmentValueChanged(sender: UISegmentedControl) {
+  @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
   }
   
   // MARK: Style
-  override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return UIStatusBarStyle.LightContent
+  override var preferredStatusBarStyle : UIStatusBarStyle {
+    return UIStatusBarStyle.lightContent
   }
   
   // MARK: Transition
-  override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-    super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
     sceneView.stop(nil)
     sceneView.play(nil)
   }
