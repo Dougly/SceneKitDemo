@@ -35,6 +35,7 @@ class ViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    sceneSetup()
   }
   
   // MARK: IBActions
@@ -52,4 +53,29 @@ class ViewController: UIViewController {
     sceneView.stop(nil)
     sceneView.play(nil)
   }
+    
+    func sceneSetup() {
+        let scene = SCNScene()
+        
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = SCNLight()
+        ambientLightNode.light!.type = SCNLight.LightType.ambient
+        ambientLightNode.light!.color = UIColor(white: 0.67, alpha: 1.0)
+        scene.rootNode.addChildNode(ambientLightNode)
+        
+        let omniLightNode = SCNNode()
+        omniLightNode.light = SCNLight()
+        omniLightNode.light!.type = SCNLight.LightType.omni
+        omniLightNode.light!.color = UIColor(white: 0.75, alpha: 1.0)
+        omniLightNode.position = SCNVector3Make(0, 50, 50)
+        scene.rootNode.addChildNode(omniLightNode)
+        
+        
+        let boxGemoetry = SCNBox(width: 10.0, height: 10.0, length: 10.0, chamferRadius: 1.0)
+        let boxNode = SCNNode(geometry: boxGemoetry)
+        scene.rootNode.addChildNode(boxNode)
+        
+        sceneView.scene = scene
+        sceneView.allowsCameraControl = true
+    }
 }
