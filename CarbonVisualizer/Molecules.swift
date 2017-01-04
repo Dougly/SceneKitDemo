@@ -24,4 +24,35 @@ import Foundation
 import SceneKit
 
 class Molecules {
+    
+    class func methaneMolecule() -> SCNNode {
+        var methaneMolecule = SCNNode()
+        
+        let carbonNode1 = nodeWithAtom(Atoms.createAtom(radius: 1.72, color: .darkGray), molecule: methaneMolecule, position: SCNVector3Make(0, 0, 0))
+        let hydrogenNode1 = nodeWithAtom(Atoms.createAtom(radius: 1.20, color: .lightGray), molecule: methaneMolecule, position: SCNVector3Make(-4, 0, 0))
+        let hydrogenNode2 = nodeWithAtom(Atoms.createAtom(radius: 1.20, color: .lightGray), molecule: methaneMolecule, position: SCNVector3Make(+4, 0, 0))
+        let hydrogenNode3 = nodeWithAtom(Atoms.createAtom(radius: 1.20, color: .lightGray), molecule: methaneMolecule, position: SCNVector3Make(0, -4, 0))
+        let hydrogenNode4 = nodeWithAtom(Atoms.createAtom(radius: 1.20, color: .lightGray), molecule: methaneMolecule, position: SCNVector3Make(0, +4, 0))
+        
+        return methaneMolecule
+    }
+    
+    class func ethanolMolecule() -> SCNNode {
+        var ethonalMolocule = SCNNode()
+        return ethonalMolocule
+    }
+    
+    class func ptfeMolecule() -> SCNNode {
+        var ptfeMolocule = SCNNode()
+        return ptfeMolocule
+    }
+    
+    class func nodeWithAtom(_ atom: SCNGeometry, molecule: SCNNode, position: SCNVector3) -> SCNNode {
+        let node = SCNNode(geometry: atom)
+        node.position = position
+        molecule.addChildNode(node)
+        return node
+    }
+    
+    
 }
