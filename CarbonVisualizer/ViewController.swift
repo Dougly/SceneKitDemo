@@ -44,6 +44,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sceneSetup()
+        geometryLabel.text = "Atoms\n"
+        geometryNode = Atoms.allAtoms()
+        sceneView.scene!.rootNode.addChildNode(geometryNode)
     }
     
     // MARK: IBActions
@@ -84,23 +87,29 @@ class ViewController: UIViewController {
         scene.rootNode.addChildNode(cameraNode)
         
         
-        let boxGemoetry = SCNBox(width: 10.0, height: 10.0, length: 10.0, chamferRadius: 1.0)
-        let boxNode = SCNNode(geometry: boxGemoetry)
-        scene.rootNode.addChildNode(boxNode)
+//        let boxGemoetry = SCNBox(width: 10.0, height: 10.0, length: 10.0, chamferRadius: 1.0)
+//        let boxNode = SCNNode(geometry: boxGemoetry)
+//        scene.rootNode.addChildNode(boxNode)
+//        
+//        geometryNode = boxNode
+//        
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
+        sceneView.addGestureRecognizer(panRecognizer)
         
         sceneView.scene = scene
-        sceneView.allowsCameraControl = true
     }
     
     
     func panGesture(_ sender: UIPanGestureRecognizer) {
-        let tanslation = sender.translationInView(sender.view!)
+        
+        let translation = sender.translation(in: sender.view!)
         var newAngle = Float(translation.x) * Float(M_PI)/180.0
         newAngle += currentAngle
+        print(newAngle)
         
         geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 0, 1, 0)
         
-        if sender.state == UIGestureRecognizerState.Ended {
+        if (sender.state == UIGestureRecognizerState.ended) {
             currentAngle = newAngle
         }
     }

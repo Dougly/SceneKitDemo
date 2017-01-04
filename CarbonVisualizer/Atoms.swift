@@ -24,4 +24,41 @@ import Foundation
 import SceneKit
 
 class Atoms {
+    
+    class func createAtom(radius: CGFloat, color: UIColor) -> SCNGeometry {
+        let atom = SCNSphere(radius: radius)
+        atom.firstMaterial!.diffuse.contents = color
+        atom.firstMaterial!.specular.contents = UIColor.white
+        return atom
+
+    }
+    
+    class func allAtoms() -> SCNNode {
+        let atomsNode = SCNNode()
+        
+        let carbonNode = SCNNode(geometry: createAtom(radius: 1.72, color: .darkGray))
+        carbonNode.position = SCNVector3Make(-6, 0 , 0)
+        atomsNode.addChildNode(carbonNode)
+        
+        let oxygenNode = SCNNode(geometry: createAtom(radius: 1.52, color: .red))
+        oxygenNode.position = SCNVector3Make(2, 0 , 0)
+        atomsNode.addChildNode(oxygenNode)
+        
+        let hydorgenNode = SCNNode(geometry: createAtom(radius: 1.20, color: .lightGray))
+        hydorgenNode.position = SCNVector3Make(-2, 0 , 0)
+        atomsNode.addChildNode(hydorgenNode)
+        
+        let fluorineNode = SCNNode(geometry: createAtom(radius: 1.47, color: .yellow))
+        fluorineNode.position = SCNVector3Make(6, 0 , 0)
+        atomsNode.addChildNode(fluorineNode)
+        
+        return atomsNode
+    }
+    
+    
 }
+
+//carbon, 1.70, darkGrey
+//oxygen 1.52, red 
+//hydrogen 1.20 lightgGrey
+//fluorineAtom 1.47 yellow
